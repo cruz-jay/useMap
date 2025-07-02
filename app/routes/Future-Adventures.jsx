@@ -1,12 +1,5 @@
-// import type { Route } from "./+types/home";
-
-// export function meta({}: Route.MetaArgs) {
-//   return [
-//     { title: "New React Router App" },
-//     { name: "description", content: "Welcome to React Router!" },
-//   ];
-// }
+import FutureCitiesList from "../components/FutureCitiesList";
 
 export default function FutureAdventures() {
-  return <h1>Visited-Cities </h1>;
+  return <FutureCitiesList />;
 }
