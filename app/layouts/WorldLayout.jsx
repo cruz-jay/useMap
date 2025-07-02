@@ -1,4 +1,3 @@
-import { Outlet } from "react-router";
 import Map from "../components/Map";
 import Sidebar from "../components/Sidebar";
 

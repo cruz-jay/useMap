@@ -1,21 +1,43 @@
 import { usePastCities } from "../store/past-cities";
 import PastCityItem from "./PastCityItem";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./ui/carousel";
+import { Card, CardContent } from "./ui/card";
 
 function PastCitiesList() {
   const { data: cities, isLoading, error } = usePastCities();
-
   const citiesArray = cities?.cities || [];
 
   if (citiesArray.length === 0)
-    return <p className="text-white">No past cities yet.</p>;
+    return <p className="text-gray-300">No past cities yet.</p>;
 
   return (
-    <div>
-      <ul className="grid grid-cols-1 gap-4">
-        {citiesArray.map((city) => (
-          <PastCityItem key={city.id} city={city} />
-        ))}
-      </ul>
+    <div className="flex justify-center w-full relative pt-20 pb-20">
+      <Carousel
+        opts={{ align: "start", loop: true }}
+        orientation="vertical"
+        className="w-full max-w-xs relative">
+        <CarouselContent className="-mt-1 h-[400px]">
+          {citiesArray.map((city) => (
+            <CarouselItem key={city.id} className="pt-1 md:basis-1/2">
+              <div className="p-1">
+                <Card className="bg-[#172a32] border-[#21373f]">
+                  <CardContent className="flex items-center justify-center p-6">
+                    <PastCityItem city={city} />
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="bg-[#1c3139] hover:bg-[#21373f] border-[#253e45] text-gray-300 left-1/2 transform -translate-x-1/2 rotate-90 z-10" />
+        <CarouselNext className="bg-[#1c3139] hover:bg-[#21373f] border-[#253e45] text-gray-300 absolute -bottom-10 left-1/2 transform -translate-x-1/2 rotate-90 z-1" />
+      </Carousel>
     </div>
   );
 }

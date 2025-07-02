@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import useCitiesStore from "../store/useCitiesStore";
+const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
 const Map = () => {
   const currentCity = useCitiesStore((state) => state.currentCity);
@@ -27,8 +28,7 @@ const Map = () => {
   useEffect(() => {
     if (mapRef.current) return;
 
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoiamF5YzEyMyIsImEiOiJjbTc4ZHBmOHoxaGJyMmlxOHVrMDM4YnJhIn0.AMLM1NWebQnxueRx0AWiqw";
+    mapboxgl.accessToken = ACCESS_TOKEN;
 
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
